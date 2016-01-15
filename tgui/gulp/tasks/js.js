@@ -1,9 +1,9 @@
 import * as f from '../flags'
 import { browserify as b, gulp as g } from '../plugins'
 
-const dir   = 'generated'
+const dir = 'generated'
 const entry = 'tgui.js'
-const out   = 'assets'
+const out = 'assets'
 
 import { transform as babel } from 'babel-core'
 import { readFileSync as read } from 'fs'
