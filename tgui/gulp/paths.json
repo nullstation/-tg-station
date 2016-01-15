@@ -1,16 +1,16 @@
 {
   "out":"assets/",
   "css":{
-    "dir":"styles/",
+    "dir":"generated/",
     "main":"main.styl",
     "out":"tgui.css"
   },
   "img":{
-    "dir":"images/",
+    "dir":"generated/images/",
     "main":"*"
   },
   "js":{
-    "dir":"scripts/",
+    "dir":"generated/",
     "main":"main.js",
     "out":"tgui.js"
   }
