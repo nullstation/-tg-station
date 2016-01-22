@@ -8,17 +8,12 @@
 	active_power_usage = 500
 	circuit = "/obj/item/weapon/circuitboard/crew"
 
-/obj/machinery/computer/crew/attack_ai(mob/user)
-	if(stat & (BROKEN|NOPOWER))
-		return
-	crewmonitor.show(user)
-
-/obj/machinery/computer/crew/attack_hand(mob/user)
-	if(..())
-		return
-	if(stat & (BROKEN|NOPOWER))
-		return
-	crewmonitor.show(user)
+/obj/machinery/computer/virtualreality/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, \
+									datum/tgui/master_ui = null, datum/ui_state/state = default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "crew", name, 900, 540, master_ui, state)
+		ui.open()
 
 var/global/datum/crewmonitor/crewmonitor = new
 
@@ -74,16 +69,6 @@ var/global/datum/crewmonitor/crewmonitor = new
 	src.jobs = jobs
 	src.interfaces = list()
 	src.data = list()
-	register_asset("crewmonitor.js",'crew.js')
-	register_asset("crewmonitor.css",'crew.css')
-
-/datum/crewmonitor/Destroy()
-	if (src.interfaces)
-		for (var/datum/html_interface/hi in interfaces)
-			qdel(hi)
-		src.interfaces = null
-
-	return ..()
 
 /datum/crewmonitor/proc/show(mob/mob, z)
 	if (mob.client)
